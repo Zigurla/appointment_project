@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -43,6 +44,7 @@ class _HomeState extends State<Home> {
   DateTime defaultDate = DateTime.now();
   TimeOfDay defaultTime = TimeOfDay.now();
   TextEditingController isimController = TextEditingController();
+  final haftaController = TextEditingController();
 
 
   /// Tablodan tıklayınca bu değişkene atılıyo tarih değeri
@@ -235,6 +237,36 @@ class _HomeState extends State<Home> {
                                           ],
                                         ),
                                       ),
+                                      Container(
+                                        color: Colors.transparent,
+                                        width: MediaQuery.of(context).size.width/4,
+                                        height: 50,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(color: Colors.grey),
+                                                  color: Colors.grey[200],
+                                                  borderRadius: BorderRadius.all(Radius.circular(15))
+                                              ),
+                                              height: 50,
+                                              width: 60,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: TextField(
+                                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                  controller: haftaController,
+                                                  decoration: InputDecoration(
+                                                    border: InputBorder.none,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -244,8 +276,20 @@ class _HomeState extends State<Home> {
                                     onPressed: ()async{
                                       final DateTime startTime = DateTime(defaultDate.year, defaultDate.month, defaultDate.day, defaultTime.hour, defaultTime.minute);
                                       final DateTime endTime = startTime.add(const Duration(hours: 1));
+                                      final int hafta = int.parse(haftaController.text);
+                                      for (int i = 0; i < hafta; i++){
+                                        meetings.add(await Appointment(
+                                          startTime: startTime.add(Duration(days: i*7)),
+                                          endTime: endTime,
+                                          subject: isimController.text,
+                                          color: startTime.isBefore(DateTime.now()) ? Colors.red : Colors.blue,
+                                          recurrenceRule: 'FREQ=DAILY;COUNT=1',
+                                          isAllDay: false,
 
-                                      meetings.add(await Appointment(
+                                        ));
+                                      }
+
+                                      /*meetings.add(await Appointment(
                                           startTime: startTime,
                                           endTime: endTime,
                                           subject: isimController.text,
@@ -253,7 +297,7 @@ class _HomeState extends State<Home> {
                                           recurrenceRule: 'FREQ=DAILY;COUNT=1',
                                           isAllDay: false,
 
-                                      ));
+                                      ));*/
                                       kaydetme();
                                     },
                                     child: Text("Kaydet"))
