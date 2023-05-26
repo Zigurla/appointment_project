@@ -298,7 +298,7 @@ class _HomeState extends State<Home> {
               ),
                   child: Column(
                     children: [
-                      Text(details.date.toString())
+                      Text(ap.subject)
                     ],
                   ),
             ),
