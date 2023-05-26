@@ -275,9 +275,10 @@ class _HomeState extends State<Home> {
         //controller: tablocontroller,
         view: CalendarView.week,
         firstDayOfWeek: 1,
+        showDatePickerButton: true,
+        showNavigationArrow: true,
         resourceViewSettings: ResourceViewSettings(
           size: 100,
-
         ),
         timeSlotViewSettings: TimeSlotViewSettings(
           timeFormat: 'H:mm',
@@ -287,11 +288,12 @@ class _HomeState extends State<Home> {
         ),
         dataSource: MeetingDataSource(meetings),
         appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details){
+          final Appointment ap = details.appointments.first;
           return GestureDetector(
             onTap: (){},
             child: Container(
               decoration: BoxDecoration(
-
+                color: ap.color,
                 borderRadius: BorderRadius.circular(8),
               ),
                   child: Column(
