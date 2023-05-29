@@ -58,16 +58,121 @@ class _HomeState extends State<Home> {
       final DateTime? date = details.date;
       print('Seçilen tarih: $date');
       showDialog(context: context, builder: (context)=> AlertDialog(
-          title: Container(
-            margin: EdgeInsets.all(25),
+          title: Container()
+
+        /*Container(
             height: MediaQuery.of(context).size.height/2,
             width: MediaQuery.of(context).size.width/2,
             child: Column(
               children: [
-                Text(date.toString())
+                Expanded(
+                  child: Column(
+                    children: [
+
+                      /// İSİM
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text("İsim"),
+                          ),
+                          SizedBox(height: 5,),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.all(Radius.circular(15))
+                            ),
+                            height: 50,
+                            width: MediaQuery.of(context).size.width/4,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: TextField(
+                                controller: isimController,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 15,),
+
+                      Container(
+                        color: Colors.transparent,
+                        width: MediaQuery.of(context).size.width/4,
+                        height: 100,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              children: [
+                                Text("Hafta",style: TextStyle(fontSize: 16),),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.grey),
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.all(Radius.circular(15))
+                                  ),
+                                  height: 50,
+                                  width: 60,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: TextField(
+                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                      controller: haftaController,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+
+                ElevatedButton(
+                    onPressed: ()async{
+                      final DateTime? startTime = date;
+                      final DateTime endTime = startTime!.add(const Duration(hours: 1));
+                      final int hafta = int.parse(haftaController.text);
+                      for (int i = 0; i < hafta; i++){
+                        meetings.add(await Appointment(
+                          startTime: startTime.add(Duration(days: i*7)),
+                          endTime: endTime,
+                          subject: isimController.text,
+                          color: startTime.isBefore(DateTime.now()) ? Colors.red : Colors.blue,
+                          recurrenceRule: 'FREQ=DAILY;COUNT=1',
+                          isAllDay: false,
+
+                        ));
+                      }
+
+                      /*meetings.add(await Appointment(
+                                          startTime: startTime,
+                                          endTime: endTime,
+                                          subject: isimController.text,
+                                          color: startTime.isBefore(DateTime.now()) ? Colors.red : Colors.blue,
+                                          recurrenceRule: 'FREQ=DAILY;COUNT=1',
+                                          isAllDay: false,
+
+                                      ));*/
+                      kaydetme();
+                    },
+                    child: Text("Kaydet"))
+
               ],
             ),
-          )
+          )*/
       ));
     }
   }
