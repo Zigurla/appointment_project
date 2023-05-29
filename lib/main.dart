@@ -58,9 +58,7 @@ class _HomeState extends State<Home> {
       final DateTime? date = details.date;
       print('Seçilen tarih: $date');
       showDialog(context: context, builder: (context)=> AlertDialog(
-          title: Container()
-
-        /*Container(
+          title: Container(
             height: MediaQuery.of(context).size.height/2,
             width: MediaQuery.of(context).size.width/2,
             child: Column(
@@ -172,7 +170,7 @@ class _HomeState extends State<Home> {
 
               ],
             ),
-          )*/
+          )
       ));
     }
   }
