@@ -437,7 +437,23 @@ class _HomeState extends State<Home> {
         appointmentBuilder: (BuildContext context, CalendarAppointmentDetails details){
           final Appointment ap = details.appointments.first;
           return GestureDetector(
-            onTap: (){},
+            onTap: (){
+              showDialog(context: context, builder: (context)=> AlertDialog(
+                content: Container(
+                  color: Colors.white,
+                  height: MediaQuery.of(context).size.height/2,
+                  width: MediaQuery.of(context).size.width/2,
+                  child: Column(
+                    children: [
+                      Text(ap.subject),
+                      Text(ap.startTime.toString()),
+                        ElevatedButton(onPressed: (){
+                        }, child: Text("df"))
+                    ],
+                  ),
+                ),
+              ) );
+            },
             child: Container(
               decoration: BoxDecoration(
                 color: ap.color,
