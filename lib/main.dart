@@ -343,29 +343,34 @@ class _HomeState extends State<Home> {
                                       Container(
                                         color: Colors.transparent,
                                         width: MediaQuery.of(context).size.width/4,
-                                        height: 50,
+                                        height: 100,
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(color: Colors.grey),
-                                                  color: Colors.grey[200],
-                                                  borderRadius: BorderRadius.all(Radius.circular(15))
-                                              ),
-                                              height: 50,
-                                              width: 60,
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(left: 10.0),
-                                                child: TextField(
-                                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                                  controller: haftaController,
-                                                  decoration: InputDecoration(
-                                                    border: InputBorder.none,
+                                            Column(
+                                              children: [
+                                                Text("Hafta",style: TextStyle(fontSize: 16),),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(color: Colors.grey),
+                                                      color: Colors.grey[200],
+                                                      borderRadius: BorderRadius.all(Radius.circular(15))
+                                                  ),
+                                                  height: 50,
+                                                  width: 60,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 10.0),
+                                                    child: TextField(
+                                                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                                      controller: haftaController,
+                                                      decoration: InputDecoration(
+                                                        border: InputBorder.none,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -385,7 +390,7 @@ class _HomeState extends State<Home> {
                                           startTime: startTime.add(Duration(days: i*7)),
                                           endTime: endTime,
                                           subject: isimController.text,
-                                          color: startTime.isBefore(DateTime.now()) ? Colors.red : Colors.blue,
+                                          color: Colors.blue,
                                           recurrenceRule: 'FREQ=DAILY;COUNT=1',
                                           isAllDay: false,
 
